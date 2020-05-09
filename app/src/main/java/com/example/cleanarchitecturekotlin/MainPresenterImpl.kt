@@ -6,18 +6,22 @@ package com.example.cleanarchitecturekotlin
 
 class MainPresenterImpl : MainContract.Presenter {
 
-    private lateinit var mView: MainContract.View
+    private var mView: MainContract.View? = null
 
 
     override fun attachView(view: MainContract.View) {
         mView = view
     }
 
+    override fun detachView() {
+        mView = null
+    }
+
     override fun login(username: String, password: String) {
         if (username == "test" && password == "123456") {
-            mView.showLoginSuccessView()
+            mView!!.showLoginSuccessView()
         } else {
-            mView.showLoginFailedView()
+            mView!!.showLoginFailedView()
         }
     }
 }
