@@ -1,10 +1,12 @@
 package com.example.cleanarchitecturekotlin
 
+import javax.inject.Inject
+
 /**
  * Created by Viet Hua on 05/09/2020.
  */
 
-class MainPresenterImpl : MainContract.Presenter {
+class MainPresenterImpl @Inject constructor() : MainContract.Presenter {
 
     private lateinit var mView: MainContract.View
 
@@ -14,7 +16,7 @@ class MainPresenterImpl : MainContract.Presenter {
     }
 
     override fun login(username: String, password: String) {
-        if (username == "test" && password == "123456") {
+        if (username == "test" && password == ("123456")) {
             mView.showLoginSuccessView()
         } else {
             mView.showLoginFailedView()
