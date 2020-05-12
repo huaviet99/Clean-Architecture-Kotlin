@@ -1,19 +1,23 @@
-package com.example.cleanarchitecturekotlin
+package com.example.cleanarchitecturekotlin.main
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import com.example.cleanarchitecturekotlin.R
+import dagger.android.AndroidInjection
 import kotlinx.android.synthetic.main.activity_main.*
+import javax.inject.Inject
 
-class MainActivity : AppCompatActivity(), MainContract.View {
+class MainActivity : AppCompatActivity(),
+    MainContract.View {
 
 
-    private lateinit var presenter: MainContract.Presenter
+    @Inject lateinit var presenter: MainContract.Presenter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        presenter = MainPresenterImpl()
+        AndroidInjection.inject(this)
 
         btnLogin.setOnClickListener { view: View? ->
             val username = edtUsername.text.toString()
@@ -32,12 +36,12 @@ class MainActivity : AppCompatActivity(), MainContract.View {
         presenter.detachView()
     }
 
-    override fun showLoginSuccessView() {
-        Toast.makeText(this, "Login Success", Toast.LENGTH_SHORT).show()
+    override fun showLoginSuccessView(data:String?) {
+        Toast.makeText(this, data, Toast.LENGTH_SHORT).show()
     }
 
-    override fun showLoginFailedView() {
-        Toast.makeText(this, "Login Failed", Toast.LENGTH_SHORT).show()
+    override fun showLoginFailedView(message:String?) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
 
     }
 

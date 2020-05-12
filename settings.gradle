@@ -1,2 +1,6 @@
 rootProject.name='Clean Architecture Kotlin'
 include ':app'
+include ':Domain'
+include ':Data'
+include ':local'
+include ':remote'

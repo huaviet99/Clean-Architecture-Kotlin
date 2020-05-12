@@ -1,12 +1,12 @@
-package com.example.cleanarchitecturekotlin
+package com.example.cleanarchitecturekotlin.main
 
 /**
  * Created by Viet Hua on 05/09/2020.
  */
 interface MainContract {
     interface View {
-        fun showLoginSuccessView()
-        fun showLoginFailedView()
+        fun showLoginSuccessView(data: String?)
+        fun showLoginFailedView(message:String?)
     }
 
     interface Presenter {
